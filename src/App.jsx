@@ -27,44 +27,21 @@ function App() {
             autoComplete="email"
           />
 
-          {/*TODO: change all the fields below for the InputText component*/}
+          <InputText
+            id="password"
+            name="password"
+            type="password"
+            required={true}
+            autoComplete="password"
+          />
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              autoComplete="new-password"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-            <p className="mt-1 text-sm text-gray-500">
-              Must be at least 8 characters.
-            </p>
-          </div>
-
-          <div>
-            <label
-              htmlFor="confirm-password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Confirm password
-            </label>
-            <input
-              id="confirm-password"
-              name="Confirm password"
-              type="password"
-              required
-              autoComplete="new-password"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
+          <InputText
+            id="confirm-password"
+            name="confirm-password"
+            type="password"
+            required={true}
+            autoComplete="new-password"
+          />
 
           <button
             type="submit"
