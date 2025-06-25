@@ -1,17 +1,18 @@
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import Wrapper from "@/components/Wrapper";
 
 function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the main page of our application.</p>
-      <Link to="/signup" className="text-blue-500 hover:underline">
-        <Button>Link to singup page</Button>
-      </Link>
-    </div>
+    <Wrapper>
+      <Button asChild>
+        <Link to="/signup" className="text-blue-500 hover:underline">
+          Link to singup page
+        </Link>
+      </Button>
+    </Wrapper>
   );
 }
 

@@ -61,6 +61,7 @@ function SignupPage() {
             autoComplete="email"
             register={register}
             errors={errors}
+            touchedFields={touchedFields}
           />
 
           <InputText
@@ -70,6 +71,7 @@ function SignupPage() {
             autoComplete="new-password"
             register={register}
             errors={errors}
+            touchedFields={touchedFields}
           />
 
           <InputText
@@ -80,6 +82,7 @@ function SignupPage() {
             autoComplete="new-password"
             register={register}
             errors={errors}
+            touchedFields={touchedFields}
           />
 
           <Button
