@@ -34,16 +34,23 @@ function SignupPage() {
   });
 
   const onSubmit = async (data) => {
-    //console.log(data);
+    const transformedData = {
+      ...data,
+      confirmPassword: data["confirm-password"],
+    };
+    delete transformedData["confirm-password"];
+
     // TODO: call the API to create a new user and redirect to the login page
     // if not successful, show an error message from the server
-    const [error, response] = await signup(data);
+    const [error, response] = await signup(transformedData);
     if (error) {
       console.error("Signup failed:", error);
       // TODO: handle error with toast notification
       return;
     }
     navigate("/");
+    // console.log(transformedData);
+    // console.log("Response:", response);
   };
 
   return (
@@ -87,8 +94,8 @@ function SignupPage() {
 
           <InputText
             label="Confirm Password"
-            id="confirmPassword"
-            name="confirmPassword"
+            id="confirm-password"
+            name="confirm-password"
             type="password"
             autoComplete="new-password"
             register={register}

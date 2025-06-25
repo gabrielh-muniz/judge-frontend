@@ -20,6 +20,6 @@ export function signup(user) {
     .post("/signup", user)
     .then((response) => [null, response.data])
     .catch((error) => {
-      return [error, null];
+      return [error.response ? error.response.data : error.message, null];
     });
 }
