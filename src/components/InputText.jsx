@@ -1,3 +1,5 @@
+import { Input } from "@/components/ui/input";
+
 function InputText({
   label = "",
   id,
@@ -7,7 +9,10 @@ function InputText({
   className = "",
   register = () => {},
   errors = {},
+  touchedFields = {},
 }) {
+  const isValid = touchedFields[name] && !errors[name];
+
   return (
     <div>
       <label
@@ -21,8 +26,12 @@ function InputText({
         type={type}
         autoComplete={autoComplete}
         className={`mt-1 block w-full px-3 py-1 border ${
-          errors[name] ? "border-red-500" : "border-gray-300"
-        } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${className}`}
+          errors[name]
+            ? "border-red-500"
+            : isValid
+            ? "border-green-500"
+            : "border-gray-300"
+        } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-900 ${className}`}
         {...register(name)}
       />
       {errors[name] && (
