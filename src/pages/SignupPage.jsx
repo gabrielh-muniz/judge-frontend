@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { signup } from "@/api/auth";
+import { useNavigate } from "react-router-dom";
 
 const schema = z
   .object({
@@ -21,18 +23,27 @@ const schema = z
   });
 
 function SignupPage() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
+    formState: { errors, touchedFields, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
     mode: "onBlur",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // TODO: call the API to create a new user
+  const onSubmit = async (data) => {
+    //console.log(data);
+    // TODO: call the API to create a new user and redirect to the login page
+    // if not successful, show an error message from the server
+    const [error, response] = await signup(data);
+    if (error) {
+      console.error("Signup failed:", error);
+      // TODO: handle error with toast notification
+      return;
+    }
+    navigate("/");
   };
 
   return (
@@ -76,8 +87,8 @@ function SignupPage() {
 
           <InputText
             label="Confirm Password"
-            id="confirm-password"
-            name="confirm-password"
+            id="confirmPassword"
+            name="confirmPassword"
             type="password"
             autoComplete="new-password"
             register={register}
@@ -87,9 +98,10 @@ function SignupPage() {
 
           <Button
             type="submit"
-            className="w-full mt-3 flex justify-center py-2 px-4 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"
+            disabled={isSubmitting}
+            className="w-full mt-3 flex justify-center py-2 px-4 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 cursor-pointer"
           >
-            Sign up
+            {isSubmitting ? "Signing up..." : "Sign up"}
           </Button>
         </form>
       </div>
